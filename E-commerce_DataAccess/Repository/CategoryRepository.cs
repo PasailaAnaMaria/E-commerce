@@ -18,14 +18,11 @@ namespace E_commerce_DataAccess.Repository
             _dbContext = appDBContext;
                 
         }
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Update(Category category)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(category);
         }
     }
 }

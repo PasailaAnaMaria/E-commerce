@@ -26,7 +26,7 @@ namespace E_commerce_DataAccess.Repository
         }
     
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T GetAll(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
             query= query.Where(filter);
