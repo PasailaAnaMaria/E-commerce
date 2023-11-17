@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,17 +24,18 @@ namespace E_commerce_DataAccess.Repository
         {
           dbSet.Add(entity);
         }
-    
 
-        public T GetAll(Expression<Func<T, bool>> filter)
+
+        public T Get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
-            query= query.Where(filter);
+            query = query.Where(filter);
             return query.FirstOrDefault();
         }
 
+       
         public IEnumerable<T> GetAll()
-        {
+        { 
             IQueryable<T> query = dbSet;
             return query.ToList(); 
         }
@@ -48,5 +49,8 @@ namespace E_commerce_DataAccess.Repository
         {
            dbSet.RemoveRange(entities);
         }
+
+       
+       
     }
 }

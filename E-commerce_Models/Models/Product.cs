@@ -36,5 +36,6 @@ namespace E_commerce_Models.Models
         [Display(Name = "Price for +100")]
         [Range(1, 1000)]
         public double Price100 { get; set; }
+        //public Category? Category { get; set; }
     }
 }
