@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_commerce_Models.Models
 {
@@ -36,6 +37,13 @@ namespace E_commerce_Models.Models
         [Display(Name = "Price for +100")]
         [Range(1, 1000)]
         public double Price100 { get; set; }
-        //public Category? Category { get; set; }
+
+
+        //we add here 2 prop for the relatrion between two table Categori
+        //and product= the resul is we add the CategoryId in the product Table
+        //and if we go in the db product table we can see the FK 
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
     }
 }
