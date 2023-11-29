@@ -31,6 +31,7 @@ namespace E_commerce_DataAccess.Data
                     Price50=26,
                     Price100=30,
                     CategoryId=1,
+                    ImageUrl="",
                 },
             new Product
             {
@@ -44,6 +45,7 @@ namespace E_commerce_DataAccess.Data
                 Price50 = 66,
                 Price100 = 50,
                 CategoryId=2,
+                ImageUrl = "",
             },
             new Product
             {
@@ -57,6 +59,7 @@ namespace E_commerce_DataAccess.Data
                 Price50 = 26,
                 Price100 = 31,
                 CategoryId = 3,
+                ImageUrl = "",
             },
             new Product
             {
@@ -70,6 +73,7 @@ namespace E_commerce_DataAccess.Data
                 Price50 = 36,
                 Price100 = 36,
                 CategoryId=1,
+                ImageUrl = "",
             },
             new Product
             {
@@ -83,6 +87,7 @@ namespace E_commerce_DataAccess.Data
                 Price50 = 16,
                 Price100 =20,
                 CategoryId=2,
+                ImageUrl = "",
             },
             new Product
             {
@@ -96,6 +101,7 @@ namespace E_commerce_DataAccess.Data
                 Price50 = 26,
                 Price100 = 30,
                 CategoryId=3,
+                ImageUrl = "",
             });
         }
 
