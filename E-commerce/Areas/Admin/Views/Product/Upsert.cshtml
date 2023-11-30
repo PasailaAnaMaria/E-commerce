@@ -6,12 +6,15 @@
 @* @model Product *@
 
 @model ProductVM 
-<form method="post">
+
+<div class="row pb-2">
+    <h2 class="text-primary">@(Model.Product.Id!=0?"Update":"Create" ) Product</h2>
+    <hr />
+ </div>
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Product.Id" hidden/>
     <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">Create Product</h2>
-            <hr />
-        </div>
+       
       @*   <div asp-validation-summary="ModelOnly"></div> *@
         <div class="mb-3 row">
             <label asp-for="Product.Title" class="p-0"></label>
@@ -53,19 +56,28 @@
             <input class="form-control" asp-for="Product.Price100" />
             <span asp-validation-for="Product.Price100" class="text-danger"></span>
         </div>
-
         <div class="mb-3 row">
             <label asp-for="Product.CategoryId" class="p-0"></label>
             <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-control ms-0"><option disabled selected>--Select Category--</option></select>
          
             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
         </div>
+        <div class="mb-3 row">
+            <label asp-for="Product.ImageUrl" class="p-0"></label>
+            <input type="file" class="form-control" asp-for="Product.ImageUrl" />
+            <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+        </div>
 
-
-
+           
         <div class="row">
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control" >Create</button>
+                @if(Model.Product.Id != 0)
+                {
+                  <button type="submit" class="btn btn-primary form-control" >Update</button>
+                }
+                else{
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                },
             </div>
             <div class="col-6 col-md-3"> 
                 <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">Back to list</a>
