@@ -11,9 +11,11 @@ namespace E_commerce.Areas.Admin.Controllers
     {
        
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -21,6 +23,7 @@ namespace E_commerce.Areas.Admin.Controllers
             
             return View(objProductList);
         }
+# region Funct Create
         //public IActionResult Create()
         //{
         //    ProductVM productVM = new()
@@ -37,6 +40,9 @@ namespace E_commerce.Areas.Admin.Controllers
         //    return View(productVM);
 
         //}
+#endregion
+      
+        
         public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
@@ -64,7 +70,8 @@ namespace E_commerce.Areas.Admin.Controllers
            
 
         }
-       
+
+        #region Funct Create   
         //public IActionResult Create(ProductVM obj)
         //{
 
@@ -87,6 +94,8 @@ namespace E_commerce.Areas.Admin.Controllers
         //        return View(obj);
         //    }
         //}
+        #endregion
+       
         
         [HttpPost]
         public IActionResult Upsert(ProductVM obj, IFormFile? file)
@@ -94,7 +103,37 @@ namespace E_commerce.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj.Product);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file !=null)
+                {
+                    string fileName=Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
+                    string productPath=Path.Combine(wwwRootPath, @"images\product");
+                    if (!string.IsNullOrEmpty(obj.Product.ImageUrl))
+                    {
+                        //delete the old img
+
+                        var oldImgPath = Path.Combine(wwwRootPath,obj.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImgPath))
+                        {
+                            System.IO.File.Delete(oldImgPath);
+                        }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                        
+                    }
+                    obj.Product.ImageUrl = @"\images\product\"+fileName;
+                }
+                if (obj.Product.Id ==0) 
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
+               
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
@@ -113,7 +152,8 @@ namespace E_commerce.Areas.Admin.Controllers
 
 
         }
-       
+        #region Funct Edit
+
         /////
         /// <summary>
         /// 
@@ -148,6 +188,7 @@ namespace E_commerce.Areas.Admin.Controllers
         //    return View(obj);
 
         //}
+        #endregion
         /// <summary>
         /// 
         /// </summary>
