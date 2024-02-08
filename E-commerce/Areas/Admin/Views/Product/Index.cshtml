@@ -22,17 +22,17 @@
         <th>Category</th>
         <th></th>
     </tr>
-    <tbody>
-        @foreach (var obj in Model)
+    @*  <tbody>
+       @foreach (var obj in Model)
         {
             <tr>
                 <td>@obj.Title</td>
                 <td>@obj.ISBN</td>
                 <td>@obj.ListPrice</td>
                 <td>@obj.Author</td>
-                <td></td>
+                <td>@obj.Category.Name</td>
              @*    <td>@obj.Category</td> *@
-                <td>
+                @* <td>
                     <div class="w-75 btn-group" role="group">
                         <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                             <i class="bi bi-pencil-square"></i>Edit
@@ -42,9 +42,10 @@
                         </a>
                     </div>
                 </td>
-            </tr>
-        }
-    </tbody>
+            </tr> *@
+       @*  }
+        </tbody>*@
 
    
 </table>
+@section Script{<script src="~/js/product.js"></script>}

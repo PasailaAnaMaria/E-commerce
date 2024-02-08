@@ -18,7 +18,9 @@ namespace E_commerce_DataAccess.Repository
         {
                 _dbContext = appDBContext;
                 this.dbSet = _dbContext.Set<T>();
-            _dbContext.Products.Include(u => u.Category);
+            //  _dbContext.Products.Include(u => u.Category);
+            _dbContext.Products.Include(u => u.Category).Include(u=>u.CategoryId);
+
           
         }
         public void Add(T entity)
@@ -34,10 +36,17 @@ namespace E_commerce_DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-       
-        public IEnumerable<T> GetAll()
+       //Category,add CategoryType in the Productlist
+        public IEnumerable<T> GetAll(string? includeProperties=null)
         { 
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            { 
+            foreach (var property in includeProperties.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries)) 
+                {
+                query=query.Include(property);
+                }
+            }
             return query.ToList(); 
         }
 

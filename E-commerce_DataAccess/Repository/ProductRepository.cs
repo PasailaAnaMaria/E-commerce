@@ -17,12 +17,12 @@ namespace E_commerce_DataAccess.Repository
         {
             _dbContext = appDBContext;
 
-        }
+        } 
 
-
+        
         public void Update(Product product)
         {
-            _dbContext.Update(product);
+            _dbContext.Update(product); 
         }
     }
 }

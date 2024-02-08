@@ -19,7 +19,7 @@ namespace E_commerce.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
             
             return View(objProductList);
         }
@@ -224,5 +224,13 @@ namespace E_commerce.Areas.Admin.Controllers
 
 
         }
+        #region API's Call
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data= objProductList });
+        }
+        #endregion
     }
 }
