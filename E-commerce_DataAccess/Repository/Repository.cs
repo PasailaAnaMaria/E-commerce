@@ -36,7 +36,21 @@ namespace E_commerce_DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-       //Category,add CategoryType in the Productlist
+
+        // added to fix an error whit get methot  homecontroller (this is provisoire to be deleted if not  need)
+        public T Get(Expression<Func<T, bool>> filter, string includeProperties)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            return query.FirstOrDefault();
+        }
+        ///end
+
+
+
+
+
+        //Category,add CategoryType in the Productlist
         public IEnumerable<T> GetAll(string? includeProperties=null)
         { 
             IQueryable<T> query = dbSet;
