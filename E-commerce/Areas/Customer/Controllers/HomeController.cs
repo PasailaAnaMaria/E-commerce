@@ -1,6 +1,9 @@
-﻿using E_commerce_DataAccess.Repository.IRepository;
+﻿using E_commerce_DataAccess.Data;
+using E_commerce_DataAccess.Repository.IRepository;
 using E_commerce_Models.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace E_commerce.Areas.Customer.Controllers
@@ -22,11 +25,12 @@ namespace E_commerce.Areas.Customer.Controllers
             IEnumerable<Product> productsList = _unitOfWork.Product.GetAll(includeProperties:"Category");
             return View(productsList);
         }
+
+        [HttpGet]
         public IActionResult Details(int? productId)
-        {
-            //Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category"); i delete this because it is not working in my code 
+        {   //ca funtion pas ..category.name== null (nous recevons pas le nom de category dans la page de details)
             Product product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category");
-            return View(product);//error category.Name==null pourquoi????? to be fixed
+            return View(product);
         }
 
         public IActionResult Privacy()

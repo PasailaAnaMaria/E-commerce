@@ -1,11 +1,13 @@
 ﻿
 using E_commerce_Models.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+using Microsoft.AspNetCore.Identity;
 
 namespace E_commerce_DataAccess.Data
 {
-    public class AppDBContext : DbContext
+    public class AppDBContext : IdentityDbContext<IdentityUser>
     {
         public AppDBContext(DbContextOptions<AppDBContext> option) : base(option)
         {
@@ -14,6 +16,8 @@ namespace E_commerce_DataAccess.Data
         public DbSet<Product> Products{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name="Action",DisplayOrder=1},
                 new Category { Id = 2, Name = "Romance", DisplayOrder = 2 },

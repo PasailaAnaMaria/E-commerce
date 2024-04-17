@@ -38,7 +38,7 @@ namespace E_commerce_DataAccess.Repository
 
 
         // added to fix an error whit get methot  homecontroller (this is provisoire to be deleted if not  need)
-        public T Get(Expression<Func<T, bool>> filter, string includeProperties)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);

@@ -46,6 +46,7 @@
                             </div>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial"></partial>
                 </div>
             </div>
         </nav>
@@ -57,11 +58,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-primary ">
-        <div class="container text-white">
+    <footer class="border-top footer text-muted">
+        <div class="container" style="text-align:center; color:black">
             &copy; 2023 - E_commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+  
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
   @*  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> *@
@@ -75,4 +77,3 @@
     @await RenderSectionAsync("Scripts", required: false) 
 </body>
 </html>
- 
