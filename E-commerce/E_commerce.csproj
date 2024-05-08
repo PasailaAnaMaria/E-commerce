@@ -35,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\E-commerce_DataAccess\E_commerce_DataAccess.csproj" />
     <ProjectReference Include="..\E-commerce_Models\E_commerce_Models.csproj" />
+    <ProjectReference Include="..\E-commerce_Utility\E-commerce_Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
