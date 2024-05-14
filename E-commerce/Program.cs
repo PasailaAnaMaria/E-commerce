@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDBContext>(option=>option.UseSqlServer(builder.
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<AppDBContext>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddRazorPages();//added to have acces to Razor files and to  add regitre&connect pages
 builder.Services.AddScoped<IEmailSender,EmailSender>();//logic sender email
