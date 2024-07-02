@@ -12,6 +12,7 @@ namespace E_commerce_DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         public ICategoryRepository Category { get; private set; }
+        public ICompanyRepository Company{ get; private set; }
         public IProductRepository Product { get; private set; }
         private AppDBContext _dbContext;
         public UnitOfWork(AppDBContext appDBContext)
@@ -19,6 +20,7 @@ namespace E_commerce_DataAccess.Repository
             _dbContext = appDBContext;
             Category = new CategoryRepository(_dbContext);
             Product = new ProductRepository(_dbContext);
+            Company = new CompanyRepository(_dbContext);
         }
 
 
